@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,17 +27,25 @@ public class GestorController {
 										// Manager para receber um EntityTransaction e então invocamos begin(). Para
 										// comitar a transação usamos commit() no EntityTransaction.
 		em.merge(_gestor); // O merge() recebe um objeto "comum", que não está no contexto de persistência,
-							// e copia as propriedades deste objeto para a verdadeira instância da entidade
-		em.getTransaction();
+		em.getTransaction().commit();					// e copia as propriedades deste objeto para a verdadeira instância da entidade
 		emf.close();
 	}
 
 	public void removerGestor(Gestor _gestor) {
 		em.getTransaction().begin();
-		Query q = em.createNamedQuery("delete gestor from gestor where matricula = " + _gestor.getMatricula());
-		em.getTransaction();
+		Query q = em.createNativeQuery("delete gestor from gestor where matricula = " + _gestor.getMatricula());
+		q.executeUpdate();
+		em.getTransaction().commit();	
 		emf.close();
 
+	}
+	
+	public List<Gestor> listar(){
+		em.getTransaction().begin();
+		Query consulta = em.createQuery("SELECT gestor FROM Gestor gestor"); //retornar todos os alunos em forma de objetos
+		List<Gestor> lista = consulta.getResultList(); // atribuir a lista
+		emf.close();
+		return lista;
 	}
 
 }
