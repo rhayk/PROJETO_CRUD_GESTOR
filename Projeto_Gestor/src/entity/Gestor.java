@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ public class Gestor {
 	@Column
 	private String matricula;
 	@Column
-	private int data_Nascimento;
+	private int idade;
 	@Column
 	private String setor;
 	
@@ -45,10 +47,10 @@ public class Gestor {
 		this.matricula = matricula;
 	}
 	public int getData_Nascimento() {
-		return data_Nascimento;
+		return idade;
 	}
-	public void setData_Nascimento(int data_Nascimento) {
-		this.data_Nascimento = data_Nascimento;
+	public void setidade(int   idade) {
+		this.idade = idade;
 	}
 	public String getSetor() {
 		return setor;

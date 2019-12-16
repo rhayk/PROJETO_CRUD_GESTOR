@@ -1,11 +1,14 @@
 package controller;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import entity.Gestor;
 
@@ -30,6 +33,17 @@ public class GestorController {
 		em.getTransaction().commit();					// e copia as propriedades deste objeto para a verdadeira instância da entidade
 		emf.close();
 	}
+	
+	public void alterar() {
+		em.getTransaction().begin();
+		Query update = em.createNamedQuery("UPDATE gestor SET gestor where gestor");
+		update.executeUpdate();          // nome tabela / dados atualizadoss/ dados escolhidos
+		em.getTransaction().commit();
+		emf.close();
+	
+	
+	}
+	
 
 	public void removerGestor(Gestor _gestor) {
 		em.getTransaction().begin();
